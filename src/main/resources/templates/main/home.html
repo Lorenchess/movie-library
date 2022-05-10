@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+    <link th:replace = "layouts::bootstrap">
+</head>
+<body>
+<nav th:replace="layouts::navbar"></nav>
+
+<div class="container my-4">
+    <h3>Current Movies</h3>
+    <hr>
+    <div class="row">
+        <div class="sm-6">
+            <table class="table table-bordered table-striped" id="movie-table">
+                <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Movie Title</th>
+                    <th>Director</th>
+                    <th>Release Date</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+
+                    <th>Edit</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aMovie, iterator : ${movies}" >
+                    <td hidden th:text="${aMovie.id}"></td>
+                    <td th:text="${iterator.index+1}"></td>
+                    <td th:text="${aMovie.title}"></td>
+                    <td th:text="${aMovie.director}"></td>
+                    <td th:text="${aMovie.releaseYear}"></td>
+                    <td th:text="${aMovie.rating}"></td>
+                    <td th:text="${aMovie.comments}"></td>
+
+                    <td><a th:href="@{movies/showUpdateMovie(id=${aMovie.id})}" class="btn btn-info">Edit</a></td>
+                    <td><a th:href="@{movies/showMovie(id=${aMovie.id})}" class="btn btn-info">View</a></td>
+                    <td><a th:href="@{movies/deleteMovie(id=${aMovie.id})}" class="btn btn-danger">Delete</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+<script>
+   $(document).ready(function() {
+    $('#movie-table').DataTable({
+        'aoColumnDefs': [{
+             'bSortable': false,
+             'aTargets':[-1]
+        }]
+    });
+   } );
+</script>
+
+</body>
+</html>

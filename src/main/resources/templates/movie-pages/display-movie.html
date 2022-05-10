@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Movie</title>
+    <link th:replace = "layouts::bootstrap">
+</head>
+<body>
+<nav th:replace="layouts::navbar"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="column-6 justify-content-center my-4">
+            <div class="card mb-3" style="max-width: 660px"  th:object="${movie}">
+                <img th:src="@{${movie.ImagePath}}" class= "img-responsive" width="660" height="545" >
+                <div class="card-body">
+                    <h5 th:text="${movie.title}" class="card-title">Title:</h5>
+                    <p th:text="${movie.comments}" class="card-text">Comments:</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
